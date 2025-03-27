@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Styles */
+.product-card {
+  @apply border p-4 m-2 shadow-lg rounded-lg;
+}
+
+.btn-primary {
+  @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700;
+}
+
+.navbar {
+  @apply bg-gray-800 text-white p-4 flex justify-between items-center;
+}
+
+.navbar a {
+  @apply text-white px-4 hover:text-gray-300;
+}
+
+.cart-item {
+  @apply flex justify-between items-center border-b p-4;
+}
+
