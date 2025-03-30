@@ -1,23 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext"; // ✅ Correct import
 
 export const Navbar = () => {
-  const { user, loginWithGoogle, logout } = useContext(AuthContext);
+  const { user, logout } = useAuth(); // ✅ Use useAuth() hook
 
   return (
     <nav className="bg-gray-800 p-4 text-white flex justify-between items-center">
-      <Link to="/">Home</Link>
-      <Link to="/cart">Cart</Link>
+      <div className="flex gap-4">
+        <Link to="/">Home</Link>
+        <Link to="/cart">Cart</Link>
+      </div>
+      
       {user ? (
         <div className="flex gap-4">
-          <span>Welcome, {user.displayName}</span>
-          <button onClick={logout} className="bg-red-500 px-3 py-1">Logout</button>
+          <span>Welcome, {user.displayName || "User"}</span> {/* Fallback in case displayName is null */}
+          <button onClick={logout} className="bg-red-500 px-3 py-1 rounded">Logout</button>
         </div>
       ) : (
-        <button onClick={loginWithGoogle} className="bg-green-500 px-3 py-1">
-          Login
-        </button>
+        <Link to="/login" className="bg-green-500 px-3 py-1 rounded">Login</Link>
       )}
     </nav>
   );

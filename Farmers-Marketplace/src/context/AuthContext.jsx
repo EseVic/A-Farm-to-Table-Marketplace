@@ -1,40 +1,45 @@
-// src/context/AuthContext.jsx
-import React, { createContext, useState, useEffect } from "react";
-import { auth } from "../firebase/firebaseConfig";
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { auth } from "../firebase/firebaseConfig"; 
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
-export const AuthContext = createContext();
+const AuthContext = createContext(); 
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("User state changed:", currentUser); 
       setUser(currentUser);
     });
     return () => unsubscribe();
   }, []);
 
-  const loginWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
+  const login = async (email, password) => {
     try {
-      await signInWithPopup(auth, provider);
+      console.log("Logging in..."); 
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("Login successful!"); 
     } catch (error) {
-      console.error("Google login failed:", error);
+      console.error("Login failed:", error.message);
     }
   };
 
   const logout = async () => {
     try {
       await signOut(auth);
+      console.log("User logged out.");
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error("Logout failed:", error.message);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export const Auth = () => useContext(AuthContext);

@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: "a-farm-to-table-marketplace"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "a-farm-to-table-marketplace-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]

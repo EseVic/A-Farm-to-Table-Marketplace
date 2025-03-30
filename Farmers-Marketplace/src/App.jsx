@@ -36,6 +36,7 @@ import { Cart } from "./components/Cart";
 import { Checkout } from "./components/Checkout";
 import { Navbar } from "./components/Navbar";
 import { AuthProvider } from "./context/AuthContext";
+import { Login } from "./components/login";
 import "tailwindcss/tailwind.css";
 
 const App = () => {
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+			<Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </Router>
