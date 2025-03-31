@@ -14,7 +14,7 @@ export const Navbar = () => {
       
       {user ? (
         <div className="flex gap-4">
-          <span>Welcome, {user.displayName || "User"}</span> {/* Fallback in case displayName is null */}
+          <span>Welcome, {user.email || "User"}</span> 
           <button onClick={logout} className="bg-red-500 px-3 py-1 rounded">Logout</button>
         </div>
       ) : (
