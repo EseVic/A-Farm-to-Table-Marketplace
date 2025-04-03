@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../firebase/firebaseConfig"; 
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged, 
+  signOut 
+} from "firebase/auth";
 
 const AuthContext = createContext(); 
 export const useAuth = () => useContext(AuthContext);
@@ -10,22 +15,32 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("User state changed:", currentUser); 
       setUser(currentUser);
     });
     return () => unsubscribe();
   }, []);
 
+  // ✅ Signup Function
+  const signup = async (email, password) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("Signup successful!");
+    } catch (error) {
+      console.error("Signup failed:", error.message);
+    }
+  };
+
+  // ✅ Login Function
   const login = async (email, password) => {
     try {
-      console.log("Logging in..."); 
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("Login successful!"); 
+      console.log("Login successful!");
     } catch (error) {
       console.error("Login failed:", error.message);
     }
   };
 
+  // ✅ Logout Function
   const logout = async () => {
     try {
       await signOut(auth);
@@ -36,10 +51,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, signup, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const Auth = () => useContext(AuthContext);
