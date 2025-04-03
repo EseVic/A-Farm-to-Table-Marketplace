@@ -19,7 +19,7 @@ export const Signup = () => {
     setLoading(true);
     try {
       await signup(email, password);
-      navigate("/dashboard");  // Redirect after signup
+      navigate("/dashboard"); 
     } catch (error) {
       setError("Signup failed. Try again.");
       console.error("Signup error:", error.message);
@@ -33,10 +33,6 @@ export const Signup = () => {
          <h2 className="text-3xl font-bold text-center text-gray-800">Register</h2>
           {error && <p className="text-red-500 text-center">{error}</p>}
     
-    {/* // <div className="min-h-screen flex items-center justify-center bg-gray-200">
-    //   <div className="bg-white p-6 rounded-lg shadow-md">
-    //     <h2 className="text-2xl font-bold">Sign Up</h2>
-    //     {error && <p className="text-red-500">{error}</p>} */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"

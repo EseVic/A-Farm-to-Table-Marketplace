@@ -61,7 +61,7 @@ export const Home = () => {
       {/* Hero Section */}
       <div
         className="relative w-full h-[80vh] flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: "url('/farming.jpg')" }} // ✅ Background Image
+        style={{ backgroundImage: "url('/farming.jpg')" }} 
       >
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>

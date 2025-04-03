@@ -32,37 +32,48 @@ export const Login = () => {
   };
 
   return (
-    //  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 p-6">
-    //    <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-    //      <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
-    //       {error && <p className="text-red-500 text-center">{error}</p>}
+    <div className="min-h-screen flex bg-gray-200">
+      {/* Left side - Image */}
+      <div
+        className="w-1/2 bg-cover bg-center"
+        style={{ backgroundImage: "url('/signupfarmer.jpg')" }}
+      ></div>
 
-     <div className="min-h-screen flex items-center justify-center bg-gray-200-to-br from-500 to purple-600 p-6">
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
-        {error && <p className="text-red-500">{error}</p>} 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="input-field"
-          /> <br /> <br />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="input-field"
-          /> <br /><br />
-          <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+      {/* Right side - Login Form */}
+      <div className="w-1/2 flex items-center justify-center">
+        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+          <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
+          {error && <p className="text-red-500">{error}</p>}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="input-field w-full px-4 py-2 border border-gray-300 rounded-lg"
+            />
+            <br />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="input-field w-full px-4 py-2 border border-gray-300 rounded-lg"
+            />
+            <br />
+            <button
+              type="submit"
+              className="btn-primary w-full px-4 py-2 bg-blue-500 text-white rounded-lg"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
+
